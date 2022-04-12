@@ -43,7 +43,7 @@ public class TempServiceImpl extends EgovAbstractServiceImpl implements TempServ
 	
 	/*@Override
 	public TempVO selectTemp(TempVO vo) throws Exception{
-		return tempDAO.selectTemp(vo);*/
+		return tempDAO.selectTemp(vo); */
 	}
    
 
