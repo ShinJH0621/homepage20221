@@ -26,5 +26,7 @@
 		</c:forEach>
 	</tbody>
 </table>
+
+<a href="/temp/tempRegist.do">등록하기</a>
 </body>
 </html>
