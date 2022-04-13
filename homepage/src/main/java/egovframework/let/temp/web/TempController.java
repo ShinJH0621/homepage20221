@@ -56,8 +56,19 @@ public class TempController {
 		return "temp/TempSelectList";
 	}
 	
+	//임시데이터 등록/수정
+	@RequestMapping(value = "/temp/tempRegist.do")
+	public String tempRegist(@ModelAttribute("searchVO") TempVO tempVO, HttpServletRequest request, ModelMap model) throws Exception{
+		
+		return "temp/TempRegist";
+	}
 	
-	
+	//임시데이터 등록하기
+	@RequestMapping(value = "/temp/insert.do")
+	public String insert(@ModelAttribute("searchVO") TempVO searchVO, HttpServletRequest request, ModelMap model) throws Exception{
+		tempService.insertTemp(searchVO);
+		return "forward:/temp/selectList.do";
+	}
 	
 	
 	

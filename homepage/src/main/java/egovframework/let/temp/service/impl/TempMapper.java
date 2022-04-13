@@ -19,5 +19,8 @@ public interface TempMapper {
     TempVO selectTemp(TempVO vo) throws Exception;
     
     //임시데이터 목록 가져오기
-    List<EgovMap> selectTempList(TempVO vo) throws Exception;
+    List<EgovMap> selectTempList(TempVO vo) throws Exception;	//List형식으로 받아옴
+    
+    //임시데이터 등록
+    void insertTemp(TempVO vo) throws Exception; //return 값이 없기 때문에 void
 }

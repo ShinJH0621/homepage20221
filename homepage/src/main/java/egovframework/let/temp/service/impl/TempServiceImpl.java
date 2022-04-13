@@ -34,12 +34,22 @@ public class TempServiceImpl extends EgovAbstractServiceImpl implements TempServ
 	private TempDAO tempDAO;
 	
 	@Override
+	//임시데이터 가져오기
 	public TempVO selectTemp(TempVO vo) throws Exception{
 		return tempMapper.selectTemp(vo);
 	}
+	
+	//임시데이터 목록 가져오기
 	public List<EgovMap> selectTempList(TempVO vo) throws Exception{
 		return tempMapper.selectTempList(vo);
 	}
+	
+	//임시데이터 등록하기
+	public String insertTemp(TempVO vo) throws Exception {
+		tempMapper.insertTemp(vo);
+		return null;
+	}
+	
 	
 	/*@Override
 	public TempVO selectTemp(TempVO vo) throws Exception{

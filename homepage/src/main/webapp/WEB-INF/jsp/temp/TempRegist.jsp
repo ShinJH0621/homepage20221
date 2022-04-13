@@ -10,28 +10,15 @@
 <title>데이터 가져오기</title>
 </head>
 <body>
-<table>
-	<thead>
-		<tr>
-			<th>TEMP_ID</th>
-			<th>TEMP_VAL</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="result" items="${resultList }">
-			<tr>
-				<td><c:out value="${result.tempId}"/></td>
-				<td>
-				<c:url var="viewUrl" value="/temp/select.do">
-					<c:param name="tempId" value="${result.tempId}"/>
-				</c:url>
-				<a href="${viewUrl}"><c:out value="${result.tempVal}"/></a>
-				</td>
-			</tr>
-		</c:forEach>
-	</tbody>
-</table>
 
-<a href="/temp/tempRegist.do">등록하기</a>
+<form action="/temp/insert.do" method="post" name="tempVO">
+	<label for="tempVal">값 정보 : </label>
+	<input type="text" id="tempVal" name="tempVal" value=""/>
+	<br/>
+	<button type="submit">등록</button>
+</form>
+
+
+
 </body>
 </html>
