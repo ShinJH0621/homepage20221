@@ -11,11 +11,29 @@
 </head>
 <body>
 
-<form action="/temp/insert.do" method="post" name="tempVO">
+<c:choose>
+	<c:when test="${not empty searchVO.tempId}">
+		<c:set var="actionUrl" value="/temp/update.do"/>
+		</c:when>
+		<c:otherwise>
+			<c:set var="actionUrl" value="/temp/insert.do"/>
+		</c:otherwise>		
+</c:choose>
+
+
+<form action="${actionUrl}" method="post" name="tempVO">
+	<input type="hidden" name="tempId" value="${result.tempId}"/>
 	<label for="tempVal">값 정보 : </label>
-	<input type="text" id="tempVal" name="tempVal" value=""/>
+	<input type="text" id="tempVal" name="tempVal" value="${result.tempVal}"/>
 	<br/>
-	<button type="submit">등록</button>
+	<c:choose>
+		<c:when test="${not empty searchVO.tempId}">
+			<button type="submit">수정</button>
+		</c:when>	
+		<c:otherwise>
+			<button type="submit">등록</button>
+		</c:otherwise>			
+	</c:choose>
 </form>
 
 
