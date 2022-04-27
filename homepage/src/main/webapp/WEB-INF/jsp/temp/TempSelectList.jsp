@@ -19,7 +19,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach var="result" items="${resultList}">
+		<c:forEach var="result" items="${resultList}"> 
 			<tr>
 				<td><c:out value="${result.tempId}"/></td>
 				<td>
