@@ -18,7 +18,7 @@
 			, CRUD_SJ AS CrudSj
 			, CRUD_CN AS CrudCn
 			, USER_NM AS UserNm
-			, DATE_FORMAT(SYSDATE(),'%Y-%m-%d') AS FrstRegist
+			, DATE_FORMAT(FRST_REGIST_PNTTM,'%Y-%m-%d') AS FrstRegist
 			FROM letcrud
 			WHERE CRUD_ID = #{crudId}
 	</select>
@@ -28,7 +28,7 @@
 			CRUD_ID
 			, CRUD_SJ
 			, USER_NM
-			, DATE_FORMAT(SYSDATE(),'%Y-%m-%d') as date
+			, DATE_FORMAT(FRST_REGIST_PNTTM,'%Y-%m-%d') as date
 			FROM letcrud
 			ORDER BY CRUD_ID DESC
 			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}

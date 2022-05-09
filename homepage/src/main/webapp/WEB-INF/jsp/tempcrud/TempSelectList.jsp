@@ -9,6 +9,30 @@
 <meta http-equiv="Content-Language" content="ko" >
 <title>데이터 가져오기</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<style>
+table { 
+	border : 1px solid #ccc;
+	width : 600px;
+	}
+th {
+	border : 1px solid #ccc;
+	height : 40px;
+	border-bottom : 2px solid #000;
+	}
+td {
+	border : 1px solid #ccc;
+	height : 25px;
+}
+.del {
+	text-align : center;
+}
+.date {
+	text-align : center;
+}
+a {
+	text-decoration : none;
+}
+</style>
 </head>
 <body>
 게시물 총 수 : <c:out value="${paginationInfo.totalRecordCount}"/>건
@@ -33,9 +57,9 @@
 				<a href="${viewUrl}"><c:out value="${result.crudSj}"/></a>
 				</td>
 				<td><c:out value="${result.userNm}"/></td>
-				<td><c:out value="${result.date}"/></td>
+				<td class="date"><c:out value="${result.date}"/></td>
 				
-				<td>
+				<td class="del">
 				<c:url var="delUrl" value="/tempcrud/delete.do">
 		<c:param name="crudId" value="${result.crudId}"/>
 		</c:url>
