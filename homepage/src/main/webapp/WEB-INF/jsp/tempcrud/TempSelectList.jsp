@@ -11,16 +11,18 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
 table { 
-	border : 1px solid #ccc;
+	border : 1px solid #000;
 	width : 600px;
+	border-collapse : collapse;
 	}
 th {
-	border : 1px solid #ccc;
+	border : 1px solid #000;
 	height : 40px;
-	border-bottom : 2px solid #000;
+	border-bottom : 1px solid #000;
+	background : #ccc;
 	}
 td {
-	border : 1px solid #ccc;
+	border : 1px solid #000;
 	height : 25px;
 }
 .del {
@@ -32,6 +34,17 @@ td {
 a {
 	text-decoration : none;
 }
+.paging_align {
+	
+	list-style-type : none;
+	
+	border-right : 1px;
+}
+.paging_align li {
+	display : inline-flex;
+	margin : 0px 3px;
+}
+
 </style>
 </head>
 <body>
@@ -57,7 +70,7 @@ a {
 				<a href="${viewUrl}"><c:out value="${result.crudSj}"/></a>
 				</td>
 				<td><c:out value="${result.userNm}"/></td>
-				<td class="date"><c:out value="${result.date}"/></td>
+				<td class="date"><c:out value="${result.frstRegistPnttm}"/></td>
 				
 				<td class="del">
 				<c:url var="delUrl" value="/tempcrud/delete.do">
@@ -84,10 +97,10 @@ a {
 	<ul class="paging_align">
 		<c:url var="pageUrl" value="/tempcrud/selectList.do?"/>
 		<c:set var="pagingParam"><c:out value="${pageUrl}"/></c:set>
-		<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="${pagingParam}"/>
+		<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="${pagingParam}" />
 	</ul>
 </div>
+<a href="/tempcrud/tempRegist.do" id="regist"><input type="button" value="글쓰기"/></a>
 
-<a href="/tempcrud/tempRegist.do">등록하기</a>
 </body>
 </html>

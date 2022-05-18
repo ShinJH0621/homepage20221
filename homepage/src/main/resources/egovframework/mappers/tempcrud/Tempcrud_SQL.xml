@@ -2,23 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.let.tempcrud.service.impl.TempcrudMapper">
 
-	<resultMap id="temp" type="egovframework.let.tempcrud.service.TempcrudVO">
+	<resultMap id="crud" type="egovframework.let.tempcrud.service.TempcrudVO">
 		<result property="crudId" column="CRUD_ID"/>
 		<result property="crudSj" column="CRUD_SJ"/>
 		<result property="crudCn" column="CRUD_CN"/>
 		<result property="userNm" column="USER_NM"/>
-		<result property="frstRegist" column="FRST_REGIST_PNTTM"/>
-		<result property="date" column="DATE_FORMAT"/>
+		<result property="frstRegistPnttm" column="FRST_REGIST_PNTTM"/>
+		
 		
 	</resultMap>
 	
-	<select id="selectTemp" resultType="egovframework.let.tempcrud.service.TempcrudVO">
+	<select id="selectTemp" resultMap="crud">
 		SELECT
-			CRUD_ID AS CrudId
-			, CRUD_SJ AS CrudSj
-			, CRUD_CN AS CrudCn
-			, USER_NM AS UserNm
-			, DATE_FORMAT(FRST_REGIST_PNTTM,'%Y-%m-%d') AS FrstRegist
+			CRUD_ID 
+			, CRUD_SJ 
+			, CRUD_CN 
+			, USER_NM 
+			, FRST_REGIST_PNTTM
 			FROM letcrud
 			WHERE CRUD_ID = #{crudId}
 	</select>
@@ -28,7 +28,7 @@
 			CRUD_ID
 			, CRUD_SJ
 			, USER_NM
-			, DATE_FORMAT(FRST_REGIST_PNTTM,'%Y-%m-%d') as date
+			, DATE_FORMAT(FRST_REGIST_PNTTM,'%Y-%m-%d') as FRST_REGIST_PNTTM
 			FROM letcrud
 			ORDER BY CRUD_ID DESC
 			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}

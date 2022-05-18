@@ -12,14 +12,13 @@ public class TempcrudVO extends ComDefaultVO implements Serializable {
 	
 	private String crudId;
 	
-	
 	private String crudSj;
 	
 	private String crudCn;
 	
 	private String userNm;
 	
-	private String frstRegist;
+	private java.util.Date frstRegistPnttm;
 
 	public String getCrudId() {
 		return crudId;
@@ -53,13 +52,15 @@ public class TempcrudVO extends ComDefaultVO implements Serializable {
 		this.userNm = userNm;
 	}
 
-	public String getFrstRegist() {
-		return frstRegist;
+	public java.util.Date getFrstRegistPnttm() {
+		return frstRegistPnttm;
 	}
 
-	public void setFrstRegist(String frstRegist) {
-		this.frstRegist = frstRegist;
+	public void setFrstRegistPnttm(java.util.Date frstRegistPnttm) {
+		this.frstRegistPnttm = frstRegistPnttm;
 	}
+
+	
 	
 	
 

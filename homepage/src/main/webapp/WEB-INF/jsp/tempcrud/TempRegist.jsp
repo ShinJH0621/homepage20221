@@ -8,6 +8,9 @@
 <head>
 <meta http-equiv="Content-Language" content="ko" >
 <title>데이터 가져오기</title>
+<style>
+
+</style>
 </head>
 <body>
 
@@ -28,16 +31,19 @@
 	<label for="userNm">작성자</label>
 	<input type="text" id="userNm" name="userNm" value="${result.userNm}"/><br>
 	<label for="crudCn">내용</label>
-	<textarea id="crudCn" name="crudCn" rows="50" cols="50" >${result.crudCn}</textarea>
+	<textarea id="crudCn" name="crudCn" rows="30" cols="50" >${result.crudCn}</textarea>
 	<br/>
+	
 	<c:choose>
 		<c:when test="${not empty searchVO.crudId}">
 			<button type="submit">수정</button>
 		</c:when>	
 		<c:otherwise>
 			<button type="submit">등록</button>
-		</c:otherwise>			
+		</c:otherwise>
 	</c:choose>
+	<a href="/tempcrud/selectList.do"><input type="button" value="취소"/></a>	
+	
 </form>
 
 
