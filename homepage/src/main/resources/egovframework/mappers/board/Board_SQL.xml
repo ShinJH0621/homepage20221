@@ -57,5 +57,38 @@
 		</where>
 	</sql>
 	
+	<insert id="insertBoard" parameterType="egovframework.let.board.service.BoardVO">
+		INSERT INTO BOARD (
+			BOARD_ID
+			, BOARD_SJ
+			, BOARD_CN
+			, INQIRE_CO
+			, CREAT_IP
+			, NOTICE_AT
+			, OTHBC_AT
+			, USE_AT
+			, ATCH_FILE_ID
+			, FRST_REGIST_PNTTM
+			, FRST_REGISTER_ID
+			, LAST_UPDT_PNTTM
+			, LAST_UPDUSR_ID
+		) VALUES (
+			#{boardId}
+			, #{boardSj}
+			, #{boardCn}
+			, 0
+			, #{creatIp}
+			, #{noticeAt}
+			, #{othbcAt}
+			, 'Y'
+			, #{atchFileId}
+			, NOW()
+			, #{userId}
+			, NOW()
+			, #{userId}
+		)
+	
+
+	</insert>
 	
 </mapper>

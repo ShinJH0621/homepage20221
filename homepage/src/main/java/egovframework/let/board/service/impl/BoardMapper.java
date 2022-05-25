@@ -14,13 +14,14 @@ import org.springframework.stereotype.Repository;
 public interface BoardMapper {
 	
 	
-   //게시물 목록 가져오기
+	//게시물 목록 가져오기
 	List<EgovMap> selectBoardList(BoardVO vo) throws Exception;
 	
 	//게시물 목록 수
 	int selectBoardListCnt(BoardVO vo) throws Exception;
 	
-	
+	//게시물 등록
+	void insertBoard(BoardVO vo) throws Exception;
 	
 	
 	

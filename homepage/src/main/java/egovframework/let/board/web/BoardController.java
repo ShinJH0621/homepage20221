@@ -74,8 +74,59 @@ public class BoardController {
 		return "board/BoardSelectList";
 	}
 	
+	//게시물 등록/수정
+	@RequestMapping(value="/board/boardRegist.do")
+	public String boardRegist(@ModelAttribute("searchVO") BoardVO BoardVO, HttpServletRequest request, ModelMap model) throws Exception{
+		
+		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		if(user == null || user.getId() == null) {
+			model.addAttribute("message", "로그인 후 사용가능합니다");
+			return "forward:/board/selectList.do";
+		}
+		else {
+			model.addAttribute("USER_INFO", user);
+		}
+		
+		BoardVO result = new BoardVO();
+		if(!EgovStringUtil.isEmpty(BoardVO.getBoardId())) {
+			/*
+			result = boardService.selectBoard(BoardVO);
+			//본인 및 관리자만 허용
+			if(!user.getId().equals(result.getFrstRegisterId()) && !"admin".equals(user.getId())) {
+				return "forward:/board/selectList.do";
+			}
+			*/
+		}
+		model.addAttribute("result", result);
+		
+		request.getSession().removeAttribute("sessionBoard");	//insert하면 생기는 sessionBoard를 삭제해준다. 이유:세션이 남아있으면 등록이 불가능하니까.
+		
+		return "board/BoardRegist";
+	}
 	
-	
+	//게시물 등록
+	@RequestMapping(value = "/board/insert.do")
+	public String insert(@ModelAttribute("searchVO") BoardVO searchVO, HttpServletRequest request, ModelMap model) throws Exception{
+		
+		//이중 서브밋 방지 체크
+		if(request.getSession().getAttribute("sessionBoard") != null) {	//한번 insert를 하면 sessionBoard에 searchVO가 담겨있다. 따라서 새로고침을 하면 sessionBoard가 null이 아니므로
+			return "forward:/board/selectList.do";						//selectList로 이동시킨다.
+		}
+		
+		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		if(user == null || user.getId() == null) {
+			model.addAttribute("message", "로그인 후 사용가능합니다.");
+			return "forward:/board/selectList.do";
+		}
+		searchVO.setCreatIp(request.getRemoteAddr());
+		searchVO.setUserId(user.getId());
+		
+		boardService.insertBoard(searchVO);
+		
+		//이중 서브밋 방지
+		request.getSession().setAttribute("sessionBoard", searchVO); //insert를 하면 searchVO를 sessionBoard에 담는다.
+		return "forward:/board/selectList.do";
+	}
 
 
 }
