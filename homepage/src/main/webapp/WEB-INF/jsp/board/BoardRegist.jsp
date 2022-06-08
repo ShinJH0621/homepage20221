@@ -74,7 +74,7 @@
 				<tr>
 					<th scope="row">내용</th>
 					<td>
-						<textarea id="boardCn" naem="boardCn" rows="15" title="내용입력"><c:out value="${result.boardCn}"/></textarea>
+						<textarea id="boardCn" name="boardCn" rows="15" title="내용입력"><c:out value="${result.boardCn}"/></textarea>
 						<!-- textarea는 태그안에서 엔터를 치면 안된다. 바로 붙여써야함. -->
 					</td>
 				</tr>
