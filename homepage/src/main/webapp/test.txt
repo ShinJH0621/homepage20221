@@ -1,0 +1,5 @@
+                        <form action="/uat/uia/actionLogin.do" method="post" name="form">
+                            <input type="text" placeholder="아이디" name="id"><br>
+                            <input type="password" placeholder="비밀번호" name="password"><br>
+                            <input type="submit" value="로그인">&nbsp;<input type="button" value="회원가입">
+                        </form>
