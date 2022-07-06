@@ -52,6 +52,10 @@ public class BoardController {
 	//메인페이지
 	@RequestMapping(value="/board/main.do")
 	public String main(@ModelAttribute("searchVO") BoardVO searchVO, HttpServletRequest request, ModelMap model) throws Exception{
+		
+		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		model.addAttribute("USER_INFO", user);
+		
 		return "board/main";
 	}
 
@@ -87,7 +91,43 @@ public class BoardController {
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		model.addAttribute("USER_INFO", user);
 
-		return "board/BoardSelectList";
+		return "board/BoardSelectList3";
+	}
+	
+	//추천 게시물 목록 가져오기
+	@RequestMapping(value="/board/recommendList.do")
+	public String recommendList(@ModelAttribute("searchVO") BoardVO searchVO, HttpServletRequest request, ModelMap model) throws Exception{
+		
+
+		
+		//공지 게시 글
+		searchVO.setNoticeAt("Y");
+		List<EgovMap> noticeResultList = boardService.recommendList(searchVO);
+		model.addAttribute("noticeResultList", noticeResultList);
+		
+		PaginationInfo paginationInfo = new PaginationInfo();
+		
+		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
+		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
+		paginationInfo.setPageSize(searchVO.getPageSize());
+		
+		searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
+		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+		
+		searchVO.setNoticeAt("N");
+		List<EgovMap> resultList = boardService.recommendList(searchVO);
+		model.addAttribute("resultList", resultList);
+		
+		int totCnt = boardService.recommendListCnt(searchVO);
+		
+		paginationInfo.setTotalRecordCount(totCnt);
+		model.addAttribute("paginationInfo", paginationInfo);
+		
+		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		model.addAttribute("USER_INFO", user);
+
+		return "board/recommend";
 	}
 	
 	//게시물 등록/수정
@@ -190,6 +230,21 @@ public class BoardController {
 			return "forward:/board/selectList.do";
 		}else if("admin".equals(user.getId())) {
 			searchVO.setMngAt("Y");
+		}
+		String atchFileId = searchVO.getAtchFileId();
+		final Map<String, MultipartFile> files = multiRequest.getFileMap();
+		if(!files.isEmpty()) {
+			if(EgovStringUtil.isEmpty(atchFileId)) {
+				List<FileVO> result = fileUtil.parseFileInf(files, "BOARD_", 0, "", "board.fileStorePath");
+				atchFileId = fileMngService.insertFileInfs(result);
+				searchVO.setAtchFileId(atchFileId);
+			}else {
+				FileVO fvo = new FileVO();
+				fvo.setAtchFileId(atchFileId);
+				int cnt = fileMngService.getMaxFileSN(fvo);
+				List<FileVO> _result = fileUtil.parseFileInf(files, "BOARD_", cnt, atchFileId, "board.fileStorePath");
+				fileMngService.updateFileInfs(_result);
+			}
 		}
 		
 		searchVO.setUserId(user.getId());

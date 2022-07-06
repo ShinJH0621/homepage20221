@@ -25,4 +25,10 @@ public interface BoardService {
 	
 	//게시물 삭제하기
 	public void deleteBoard(BoardVO vo) throws Exception;
+	
+	//추천 게시글 목록 가져오기
+	public List<EgovMap> recommendList(BoardVO vo) throws Exception;
+	
+	//추천 게시글 목록 수
+	public int recommendListCnt(BoardVO vo) throws Exception;
 }

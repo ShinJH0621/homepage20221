@@ -79,6 +79,19 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		
 	}
 	
+	//추천 게시글 목록 가져오기
+	@Override
+	public List<EgovMap> recommendList(BoardVO vo) throws Exception {
+		
+		return boardMapper.recommendList(vo);
+	}
+
+	@Override
+	public int recommendListCnt(BoardVO vo) throws Exception {
+		
+		return boardMapper.recommendListCnt(vo);
+	}
+	
 
 	}
    

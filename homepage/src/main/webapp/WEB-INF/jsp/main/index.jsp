@@ -5,55 +5,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>   
+   
+   
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <meta http-equiv="Content-Language" content="ko" >
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<meta charset="UTF-8">
 <title>요리?조리!</title>
 <link href="/asset/front/css/style.css" rel="stylesheet" />
-<link href="/asset/style.css" rel="stylesheet"/>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-<style>
- @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
-    body {
-        font-family: 'Noto Sans KR', sans-serif;
-    }        
-</style>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
-<header id="header">
-    <h1 class="logo1"><img src="/asset/logo5.png" alt="SMARTSOFEWARE" width="70px" height="70px"></h1>
-    <h1 class="webname">  요리?조리!</h1>
-    <nav class="gnb">
-        <ul>
-            <a href="/board/main.do"><li>메인</li></a>
-            <a href="/board/selectList.do"><li>게시판</li></a>
-            <a href="/board/recommendList.do"><li>오늘뭐먹지?</li></a>
-            <li>
-            <c:choose>
+<c:choose>
 	<c:when test="${empty USER_INFO.id}">
-		<a href="/login/actionLogin.do" class="login">로그인</a>
+		<a href="/login/egovLoginUsr.do" class="login">로그인</a>
 	</c:when>
 	<c:otherwise>
 		<a href="/login/actionLogout.do"><c:out value="${USER_INFO.name}"/>님 로그아웃</a>
 	</c:otherwise>
-			</c:choose>
-            </li>
-        </ul>
-    </nav>
-</header>
-<section class="slider">
+</c:choose>
 
-</section>
-
-<footer>
-    <p>Copyright(c) 2022 Smartsoftware. All rights reserved</p>
-</footer>
 <div class="dim"></div>
 <!-- 로그인 -->
 <div class="layer-popup layer-login" style="display:none;">
@@ -79,6 +53,7 @@
 		</form>
 	</div>
 </div>
+
 <script>
 $(document).ready(function(){
 	//로그인
@@ -112,5 +87,7 @@ function vali(){
 </c:if>
 
 </script>
+
+
 </body>
 </html>

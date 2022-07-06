@@ -36,7 +36,7 @@ public class ComDefaultVO implements Serializable {
     private int pageIndex = 1;
 
     /** 페이지갯수 */
-    private int pageUnit = 10;
+    private int pageUnit = 9;
 
     /** 페이지사이즈 */
     private int pageSize = 10;

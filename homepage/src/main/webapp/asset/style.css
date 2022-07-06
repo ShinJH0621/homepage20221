@@ -1,0 +1,164 @@
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:1;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000;
+    font-style:italic;
+    font-weight:bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;  
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+    vertical-align:middle;
+}
+/*초기화코드 끝*/
+
+#header {
+    width: 1200px;
+    margin: 0 auto;
+  
+    height: 90px;
+}
+#header .logo1 {
+    float: left;
+    padding-top: 9px;
+}
+#header .webname {
+    float: left;
+    font-size: 36px;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+#header .gnb {
+    float: right;
+    padding-top: 25px;
+}
+#header .gnb li {
+    display: inline-block;
+    font-size: 24px;
+    padding: 10px 30px;
+    font-weight: bold;
+    
+}
+.slider {
+    height: 800px;
+    background: url(/asset/newIndex.png) center top no-repeat;
+    background-size: cover;
+}
+.slider .sl-txt h2 {
+    color: white;
+    font-size: 36px;
+    padding-top: 300px;
+    text-align: center;
+}
+.slider .sl-txt p {
+    color: white;
+    font-size: 20px;
+    padding-top: 10px;
+    text-align: center;
+    word-spacing: 5px;
+}
+.content {
+
+    width: 1200px;
+    margin: 0 auto;
+}
+.content h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 36px;
+}
+.item-wrap {
+    font-size: 0;
+}
+.item-wrap .item {
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    font-size: 16px;
+}
+footer {
+    text-align: center;
+    padding: 20px 0;
+}

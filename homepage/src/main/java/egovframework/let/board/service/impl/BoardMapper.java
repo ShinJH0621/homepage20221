@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
 public interface BoardMapper {
 	
 	
+	
+
 	//게시물 목록 가져오기
 	List<EgovMap> selectBoardList(BoardVO vo) throws Exception;
 	
@@ -34,5 +36,11 @@ public interface BoardMapper {
 	
 	//게시물 삭제하기
 	void deleteBoard(BoardVO vo) throws Exception;
+
+	//추천 게시글 가져오기
+	List<EgovMap> recommendList(BoardVO vo) throws Exception;
+	
+	//추천 게시글 목록 수
+	int recommendListCnt(BoardVO vo) throws Exception;
 	
 }
