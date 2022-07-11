@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.let.reply.service.impl.ReplyMapper">
+	
+	
+	
+	<insert id="addReply" parameterType="egovframework.let.reply.service.ReplyVO">
+	INSERT INTO REPLY (
+		REPLY_ID
+		, REPLY_CN
+		, REPLY_DATE
+		, REPLY_BOARD_ID
+		, REPLY_EMPLYR_ID
+		)
+		VALUES (
+		#{replyId}
+		, #{replyCn}
+		, NOW()
+		, #{boardId}
+		, #{userId}
+		)
+	</insert>
+	
+	
+	
+
+	
+</mapper>

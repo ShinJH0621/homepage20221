@@ -14,7 +14,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
 <title>요리?조리!</title>
 <link href="/asset/front/css/style.css" rel="stylesheet" />
-<link href="/asset/style.css" rel="stylesheet"/>
+<link href="/asset/style.css?afte" rel="stylesheet"/>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <style>
@@ -24,6 +24,27 @@
     }        
 </style>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    var index = 0;   //이미지에 접근하는 인덱스
+    window.onload = function(){
+        slideShow();
+    }
+    
+    function slideShow() {
+    var i;
+    var x = document.getElementsByClassName("slide1");  //slide1에 대한 dom 참조
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";   //처음에 전부 display를 none으로 한다.
+    }
+    index++;
+    if (index > x.length) {
+        index = 1;  //인덱스가 초과되면 1로 변경
+    }   
+    x[index-1].style.display = "block";  //해당 인덱스는 block으로
+    setTimeout(slideShow, 4000);   //함수를 4초마다 호출
+ 
+}
+</script>
 </head>
 <body>
 <header id="header">
@@ -48,7 +69,9 @@
     </nav>
 </header>
 <section class="slider">
-
+ 		<img class="slide1" src="/asset/newIndex4.png" >
+        <img class="slide1" src="/asset/newIndex5.png">
+        <img class="slide1" src="/asset/newIndex6.png">
 </section>
 
 <footer>

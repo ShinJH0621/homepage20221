@@ -21,7 +21,7 @@
 <meta http-equiv="Content-Language" content="ko" >
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-<title>수업용 게시판</title>
+<title>요리?조리!</title>
 <link href="/asset/front/css/style.css" rel="stylesheet" />
 <!-- BBS Style -->
 <link href="/asset/BBSTMP_0000000000001/style.css" rel="stylesheet"/>
@@ -46,7 +46,18 @@ width: 100%;
 .menu .gnb a:hover {
 	color: #bbb;
 }
-
+footer {
+	
+    text-align: center;
+    
+}
+footer p {
+	padding: 10px 0;
+}
+#bbs_search {
+	width: 1200px;
+	margin: 5px auto;
+}
 </style>
 </head>
 <body>
@@ -76,9 +87,26 @@ width: 100%;
             <img src="/asset/yori.png" alt="" id="lg" width="310px;" height="245px;">
         </div>
         <div class="thisweek">
-            <h1>나만의 비밀 레시피 공유</h1>
+            <h1>나만의 <span style="color:red;">비밀</span> 레시피 공유</h1>
         </div>
 </div>
+		<div id="bbs_search">
+			<form name="frm" method="post" action="/board/selectList.do">
+				<fieldset>
+					<legend>검색조건입력폼</legend>
+					<label for="ftext" class="hdn">검색분류선택</label>
+					<select name="searchCondition" id="ftext">
+						<option value="0" <c:if test="${searchVO.searchCondition eq '0'}">selected="selected"</c:if>>제목</option>
+						<option value="1" <c:if test="${searchVO.searchCondition eq '1'}">selected="selected"</c:if>>내용</option>
+						<option value="2" <c:if test="${searchVO.searchCondition eq '2'}">selected="selected"</c:if>>작성자</option>
+					</select>
+					<label for="inp_text" class="hdn">검색어입력</label>
+					<input name="searchKeyword" value="<c:out value="${searchVO.searchKeyword}"/>" type="text" class="inp_s" id="inp_text" />
+					<span class="bbtn_s"><input type="submit" value="검색" title="검색(수업용 게시판 게시물 내)" />
+					</span>
+				</fieldset>
+			</form>
+		</div>
     <section>
     <div class="list_wrap">
         <ul>
@@ -91,7 +119,7 @@ width: 100%;
 							<c:param name="thumbYn" value="Y"/>
 							<c:param name="atchFileNm" value="${result.atchFileNm}"/>
 					</c:url>
-					<img src="${thumbUrl}" alt="" width="100%;" height="200px"/>
+					<img src="${thumbUrl}" alt="" width="100%" height="200px"/>
 				</c:when>
 				<c:otherwise>
 					<p class="noimage">이미지가 없습니다.</p>
@@ -111,7 +139,7 @@ width: 100%;
         </ul>
     </div>
     </section>
-    			<div id="paging">
+    		<div id="paging">
 				<c:url var="pageUrl" value="/board/selectList.do${_BASE_PARAM}"/>
 				<c:set var="pagingParam"><c:out value="${pageUrl}"/></c:set>
 				<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="${pagingParam}"/>
@@ -122,6 +150,10 @@ width: 100%;
 				<i class="ico-check-spot"></i> 글쓰기			
 			</a>
 		</div>
+<footer>
+    <p>Copyright(c) 2022 Smartsoftware. All rights reserved</p>
+</footer>		
+<div class="dim"></div>
 <div class="layer-popup layer-login" style="display:none;">
 	<header class="layer-header">
 		<span class="logo">

@@ -43,4 +43,7 @@ public interface BoardMapper {
 	//추천 게시글 목록 수
 	int recommendListCnt(BoardVO vo) throws Exception;
 	
+	//추천수
+	void recommendUp(BoardVO vo) throws Exception;
+	
 }

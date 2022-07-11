@@ -31,6 +31,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -88,6 +89,7 @@ public class BoardController {
 		paginationInfo.setTotalRecordCount(totCnt);
 		model.addAttribute("paginationInfo", paginationInfo);
 		
+
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		model.addAttribute("USER_INFO", user);
 
@@ -126,7 +128,7 @@ public class BoardController {
 		
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		model.addAttribute("USER_INFO", user);
-
+		
 		return "board/recommend";
 	}
 	
@@ -213,6 +215,7 @@ public class BoardController {
 			}
 		}
 		model.addAttribute("result", result);
+		
 		return "board/BoardSelect";
 	}
 
@@ -273,4 +276,18 @@ public class BoardController {
 		
 		return "forward:/board/selectList.do";
 	}
+	
+	//추천수
+	@RequestMapping(value = "/board/recommend.do")
+	@ResponseBody
+	public String recommend(@ModelAttribute("searchVO") BoardVO searchVO, HttpServletRequest request, ModelMap model) throws Exception{
+		
+		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		model.addAttribute("USER_INFO", user);
+		boardService.recommendUp(searchVO);
+		
+		return "추천하였습니다";
+	}
+	
+	
 }

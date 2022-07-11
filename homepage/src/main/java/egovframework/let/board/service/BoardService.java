@@ -31,4 +31,6 @@ public interface BoardService {
 	
 	//추천 게시글 목록 수
 	public int recommendListCnt(BoardVO vo) throws Exception;
+
+	public void recommendUp(BoardVO vo) throws Exception;
 }

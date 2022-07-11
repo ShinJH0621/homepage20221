@@ -123,8 +123,9 @@ input, select {
 }
 .slider {
     height: 800px;
-    background: url(/asset/newIndex.png) center top no-repeat;
-    background-size: cover;
+}
+.slide1 {
+	width: 100%;
 }
 .slider .sl-txt h2 {
     color: white;
@@ -159,6 +160,10 @@ input, select {
     font-size: 16px;
 }
 footer {
+	
     text-align: center;
-    padding: 20px 0;
+    
+}
+footer p {
+	padding-top: 10px;
 }

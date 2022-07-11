@@ -13,12 +13,13 @@
 	<c:if test="${not empty searchVO.searchKeyword}">
 		<c:param name="searchKeyword" value="${searchVO.searchKeyword}"/>
 	</c:if>
+	<c:param name="recommend" value="Y"/>
 </c:url>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>오늘의 메뉴 추천</title>
 <link href="/asset/front/css/style.css" rel="stylesheet" />
 
 <!-- BBS Style -->
@@ -64,6 +65,16 @@ width: 100%;
 .cont p{
 	padding-top: 5px;
 }
+footer {
+	
+    text-align: center;
+    
+}
+footer p {
+	padding: 10px 0;
+}
+
+
 </style>
 
 
@@ -100,6 +111,7 @@ width: 100%;
                 </script> | 이번주 추천메뉴</h1>
         </div>
 </div>
+
 		    <div class="list_wrap">
         	<ul>
         	<c:forEach var="result" items="${resultList}" varStatus="status">
@@ -138,7 +150,12 @@ width: 100%;
 				<c:set var="pagingParam"><c:out value="${pageUrl}"/></c:set>
 				<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="${pagingParam}"/>
 			</div>
+<footer>
+    <p>Copyright(c) 2022 Smartsoftware. All rights reserved</p>
+</footer>			
+			
 
+<div class="dim"></div>
 <div class="layer-popup layer-login" style="display:none;">
 	<header class="layer-header">
 		<span class="logo">

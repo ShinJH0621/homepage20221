@@ -91,6 +91,15 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		
 		return boardMapper.recommendListCnt(vo);
 	}
+
+	@Override
+	public void recommendUp(BoardVO vo) throws Exception {
+		
+		boardMapper.recommendUp(vo);
+		
+	}
+
+	
 	
 
 	}
