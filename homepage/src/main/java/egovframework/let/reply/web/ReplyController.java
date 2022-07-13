@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.com.cmm.LoginVO;
 import egovframework.com.cmm.util.EgovUserDetailsHelper;
+import egovframework.let.board.service.BoardVO;
 import egovframework.let.reply.service.ReplyService;
 import egovframework.let.reply.service.ReplyVO;
 
@@ -24,20 +25,12 @@ public class ReplyController {
 	
 	@RequestMapping(value="/reply/add.do")
 	@ResponseBody
-	public String add(@ModelAttribute("ReplyVO") ReplyVO ReplyVO, HttpServletRequest request, ModelMap model) throws Exception {
+	public String add(@ModelAttribute("ReplyVO") ReplyVO ReplyVO, HttpServletRequest request, ModelMap model, BoardVO boardVo) throws Exception {
 		
-		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
-		if(user == null || user.getId() == null) {
-			model.addAttribute("message", "로그인 후 사용가능합니다");
-			return "forward:/board/main.do";
-		}
-		else {
-			model.addAttribute("USER_INFO", user);
-		}
+
+
 		
-		ReplyVO.setReplyEmplyrId(user.getId());
-		
-		replyService.addReply(ReplyVO);
+		int num = replyService.addReply(ReplyVO);
 		
 		return "";
 		

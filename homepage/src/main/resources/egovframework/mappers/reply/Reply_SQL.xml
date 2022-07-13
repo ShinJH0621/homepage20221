@@ -16,8 +16,8 @@
 		#{replyId}
 		, #{replyCn}
 		, NOW()
-		, #{boardId}
-		, #{userId}
+		, #{replyBoardId}
+		, #{replyEmplyrId}
 		)
 	</insert>
 	

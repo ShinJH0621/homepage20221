@@ -6,6 +6,6 @@ import egovframework.rte.psl.dataaccess.mapper.Mapper;
 @Mapper("replyMapper")
 public interface ReplyMapper {
 
-	void addReply(ReplyVO vo) throws Exception;
+	int addReply(ReplyVO vo) throws Exception;
 
 }

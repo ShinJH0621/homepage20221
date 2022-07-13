@@ -13,13 +13,13 @@
 	<c:if test="${not empty searchVO.searchKeyword}">
 		<c:param name="searchKeyword" value="${searchVO.searchKeyword}"/>
 	</c:if>
-	<c:param name="recommend" value="Y"/>
+	<c:param name="like" value="Y"/>
 </c:url>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>오늘의 메뉴 추천</title>
+<title>찜 레시피</title>
 <link href="/asset/front/css/style.css" rel="stylesheet" />
 
 <!-- BBS Style -->
@@ -29,27 +29,7 @@
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link href="/asset/rcmdstyle.css?after" rel="stylesheet"/>
-<script LANGUAGE="JavaScript">
-        
-        function formatDate(date) {
-               var mymonth = date.getMonth()+1;
-               var myweekday = date.getDate();
-               return (mymonth + "월" + myweekday + "일");
-        }
-        
-        function printWeek() {
-               var now = new Date();
-               var nowDayOfWeek = now.getDay();
-               var nowDay = now.getDate();
-               var nowMonth = now.getMonth();
-               var nowYear = now.getYear();
-               nowYear += (nowYear < 2000) ? 1900 : 0;
-               var weekStartDate = new Date(nowYear, nowMonth, nowDay - nowDayOfWeek);
-               var weekEndDate = new Date(nowYear, nowMonth, nowDay + (6 - nowDayOfWeek));
-               document.write(formatDate(weekStartDate) + " - " + formatDate(weekEndDate));
-        }
-        
-</script>
+
 <style>
 .logo1 {
 	text-align: center;
@@ -82,14 +62,12 @@ footer p {
 <body>
 <div class="wrap">
         
- 	<%@include file="/WEB-INF/jsp/main/inc/Header.jsp" %>
+  <%@include file="/WEB-INF/jsp/main/inc/Header.jsp" %>
         <div class="logo1">
-            <img src="/asset/whattoeat.png" alt="" id="lg" width="310px;" height="245px;">
+            <img src="/asset/likelogo.png" alt="" id="lg" width="310px;" height="245px;">
         </div>
         <div class="thisweek">
-            <h1><script>
-                printWeek();
-                </script> | 이번주 추천메뉴</h1>
+            <h1>${USER_INFO.name}님이 찜한 레시피</h1>
         </div>
 </div>
 
@@ -127,11 +105,11 @@ footer p {
        		 </ul>
   		  </div>
 			<div id="paging">
-				<c:url var="pageUrl" value="/board/recommendList.do${_BASE_PARAM}"/>
+				<c:url var="pageUrl" value="/board/likeList.do${_BASE_PARAM}"/>
 				<c:set var="pagingParam"><c:out value="${pageUrl}"/></c:set>
 				<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="${pagingParam}"/>
 			</div>
-	<%@include file="/WEB-INF/jsp/main/inc/Footer.jsp"%>			
+<%@include file="/WEB-INF/jsp/main/inc/Footer.jsp"%>		
 			
 
 

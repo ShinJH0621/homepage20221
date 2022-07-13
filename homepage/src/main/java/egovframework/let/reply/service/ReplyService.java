@@ -2,6 +2,6 @@ package egovframework.let.reply.service;
 
 public interface ReplyService {
 	
-	String addReply(ReplyVO replyvo) throws Exception;
+	int addReply(ReplyVO replyvo) throws Exception;
 	
 }

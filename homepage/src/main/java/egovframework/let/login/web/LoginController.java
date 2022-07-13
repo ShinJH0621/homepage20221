@@ -57,10 +57,13 @@ public class LoginController {
 		LoginVO resultVO = loginService.actionLogin(loginVO);
 		if(resultVO != null && resultVO.getId() != null && !resultVO.getId().equals("")) {
 			request.getSession().setAttribute("LoginVO", resultVO);
-			return "forward:/board/main.do";
+			
+			
+			return "redirect:" + request.getHeader("Referer");
+
 		} else {
 			model.addAttribute("loginMessage", egovMessageSource.getMessage("fail.common.login"));
-		return "forward:/board/main.do";
+		return "redirect:" + request.getHeader("Referer");
 		}
 	}
 	
@@ -72,7 +75,7 @@ public class LoginController {
 //		.removeAttribute("LoginVO", RequestAttributes.SCOPE_SESSION);
 		request.getSession().invalidate();
 		
-		return "forward:/board/main.do";
+		return "redirect:" + request.getHeader("Referer");
 		
 	}
 	

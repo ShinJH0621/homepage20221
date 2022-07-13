@@ -19,14 +19,12 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	
 	@Override
-	public String addReply(ReplyVO vo) throws Exception {
+	public int addReply(ReplyVO vo) throws Exception {
 		
 		String id = idgenService.getNextStringId();
 		vo.setReplyId(id);
-		replyMapper.addReply(vo);
 		
-		
-		return id;
+		return replyMapper.addReply(vo);
 	}
 
 }

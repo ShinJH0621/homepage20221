@@ -32,5 +32,12 @@ public interface BoardService {
 	//추천 게시글 목록 수
 	public int recommendListCnt(BoardVO vo) throws Exception;
 
+	//추천업
 	public void recommendUp(BoardVO vo) throws Exception;
+
+	//찜목록 가져오기
+	public List<EgovMap> likeList(BoardVO vo) throws Exception;
+	
+	//찜목록 수
+	public int likeListCnt(BoardVO vo) throws Exception;
 }

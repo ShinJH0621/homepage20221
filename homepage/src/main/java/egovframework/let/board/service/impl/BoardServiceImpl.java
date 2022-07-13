@@ -99,6 +99,18 @@ public class BoardServiceImpl extends EgovAbstractServiceImpl implements BoardSe
 		
 	}
 
+	@Override
+	public List<EgovMap> likeList(BoardVO vo) throws Exception {
+		
+		return boardMapper.likeList(vo);
+	}
+
+	@Override
+	public int likeListCnt(BoardVO vo) throws Exception {
+		
+		return boardMapper.likeListCnt(vo);
+	}
+
 	
 	
 

@@ -55,7 +55,11 @@
             <a href="/board/main.do"><li>메인</li></a>
             <a href="/board/selectList.do"><li>게시판</li></a>
             <a href="/board/recommendList.do"><li>오늘뭐먹지?</li></a>
-            <li>
+            <c:if test="${not empty USER_INFO.id}">
+            <a href="/board/likeList.do"><li>찜</li></a>
+            </c:if>
+            
+     		<li>
             <c:choose>
 	<c:when test="${empty USER_INFO.id}">
 		<a href="/login/actionLogin.do" class="login">로그인</a>

@@ -11,6 +11,8 @@ import egovframework.com.cmm.service.FileVO;
 import egovframework.com.cmm.util.EgovUserDetailsHelper;
 import egovframework.let.board.service.BoardService;
 import egovframework.let.board.service.BoardVO;
+import egovframework.let.board.service.LikeService;
+import egovframework.let.board.service.LikeVO;
 import egovframework.let.cop.bbs.service.BoardMaster;
 import egovframework.let.cop.bbs.service.BoardMasterVO;
 import egovframework.let.cop.bbs.service.EgovBBSAttributeManageService;
@@ -49,6 +51,8 @@ public class BoardController {
 	@Resource(name = "fileMngUtil")
 	private FileMngUtil fileUtil;
 	
+	@Resource(name = "likeService")
+	private LikeService likeService;
 	
 	//메인페이지
 	@RequestMapping(value="/board/main.do")
@@ -216,6 +220,10 @@ public class BoardController {
 		}
 		model.addAttribute("result", result);
 		
+		searchVO.setNoticeAt("N");
+		List<EgovMap> resultList = boardService.likeList(searchVO);
+		model.addAttribute("resultList", resultList);
+		
 		return "board/BoardSelect";
 	}
 
@@ -287,6 +295,66 @@ public class BoardController {
 		boardService.recommendUp(searchVO);
 		
 		return "추천하였습니다";
+	}
+	
+	//찜하기
+	@RequestMapping(value="/board/likeadd.do")
+	@ResponseBody
+	public String like(@ModelAttribute("searchVO") BoardVO searchVO, HttpServletRequest request, ModelMap model, LikeVO vo) throws Exception{
+		
+		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		model.addAttribute("USER_INFO", user);
+		likeService.likeadd(vo);
+		
+		return "";
+	}
+	
+	//찜삭제
+	@RequestMapping(value="/board/likedel.do")
+	@ResponseBody
+	public String likedel(@ModelAttribute("searchVO") BoardVO searchVO, HttpServletRequest request, ModelMap model, LikeVO vo) throws Exception{
+		
+		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		model.addAttribute("USER_INFO", user);
+		likeService.likedel(vo);
+		
+		return "";
+	}
+	
+	//찜목록
+	@RequestMapping(value="/board/likeList.do")
+	public String likeList(@ModelAttribute("searchVO") BoardVO searchVO, HttpServletRequest request, ModelMap model) throws Exception{
+		
+
+		
+		//공지 게시 글
+		searchVO.setNoticeAt("Y");
+		List<EgovMap> noticeResultList = boardService.likeList(searchVO);
+		model.addAttribute("noticeResultList", noticeResultList);
+		
+		PaginationInfo paginationInfo = new PaginationInfo();
+		
+		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
+		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
+		paginationInfo.setPageSize(searchVO.getPageSize());
+		
+		searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
+		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+		
+		searchVO.setNoticeAt("N");
+		List<EgovMap> resultList = boardService.likeList(searchVO);
+		model.addAttribute("resultList", resultList);
+		
+		int totCnt = boardService.likeListCnt(searchVO);
+		
+		paginationInfo.setTotalRecordCount(totCnt);
+		model.addAttribute("paginationInfo", paginationInfo);
+		
+		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		model.addAttribute("USER_INFO", user);
+		
+		return "board/like";
 	}
 	
 	

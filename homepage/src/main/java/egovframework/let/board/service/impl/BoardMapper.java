@@ -45,5 +45,13 @@ public interface BoardMapper {
 	
 	//추천수
 	void recommendUp(BoardVO vo) throws Exception;
+
+	//찜목록
+	List<EgovMap> likeList(BoardVO vo) throws Exception;
+	
+	//찜목록수
+	int likeListCnt(BoardVO vo) throws Exception;
+	
+	
 	
 }

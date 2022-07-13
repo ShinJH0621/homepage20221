@@ -26,8 +26,19 @@
 }
 #rcmd {
 	position: absolute;
-	top: 15px;
+	top: 63px;
 	left: 0px;
+}
+#like {
+	position: absolute;
+	top: 63px;
+	left: 100px;
+
+}
+#likedel {
+	position: absolute;
+	top: 63px;
+	left: 190px;
 }
 
 </style>
@@ -45,7 +56,9 @@
 	</c:if>
 </c:url>
 
+
 <div class="container">
+
 	<div id="contents">
 		<div id="bbs_wrap">
 			<div class="board_view">
@@ -80,9 +93,69 @@
 			
 			<div class="btn-cont ar">
 				<form action="/board/recommend.do" method="post">
-				<input type="hidden" name="boardId" value="${result.boardId}"/>
-				<input type="button" value="추천" id="rcmd" class="btn btn-light"/>
-				</form>	
+					<input type="hidden" name="boardId" value="${result.boardId}"/>
+					<input type="button" value="추천" id="rcmd" class="btn btn-light"/>
+				</form>
+			
+					
+					<form action="/board/likedel.do" method="post">
+					<input type="hidden" name="boardLikeUser" value="${USER_INFO.id}"/>
+					<input type="hidden" name="boardLikeCno" value="${result.boardId}"/>
+					<input type="button" value="찜삭제" id="likedel" class="btn btn-light"/>
+					</form>
+					
+					<form action="/board/likeadd.do" method="post">
+					<input type="hidden" name="boardLikeUser" value="${USER_INFO.id}"/>
+					<input type="hidden" name="boardLikeCno" value="${result.boardId}"/>
+					<input type="button" value="찜" id="like" class="btn btn-light"/>
+					</form>
+					
+						
+				
+				<script type="text/javascript">
+					$('#like').on('click', function() {
+						/* var menuId = $( "ul.nav" ).first().attr( "id" ); */
+						var request = $.ajax({
+						  url: "/board/likeadd.do", //요청주소
+						  method: "POST",	//요청방식
+						  data: { boardLikeUser : $('[name="boardLikeUser"]').val(), boardLikeCno : $('[name="boardLikeCno"]').val()}, //파라미터
+						  dataType: "text"	//요청의 결과(서버의 응답)으로 받을 데이터의 형식
+						});
+						 
+						request.done(function( msg ) { //요청에 대한 응답을 성공적으로 받았을때 실행할 함수
+						  //서버로부터 받은 응답이 인자로 전달된다
+							location.reload();
+						});
+						 
+						request.fail(function( jqXHR, textStatus ) { //요청이 실패한 경우 실행할 함수
+						  alert( "Request failed: " + textStatus );
+						});
+						
+					})
+					
+				</script>
+				<script type="text/javascript">
+					$('#likedel').on('click', function() {
+						/* var menuId = $( "ul.nav" ).first().attr( "id" ); */
+						var request = $.ajax({
+						  url: "/board/likedel.do", //요청주소
+						  method: "POST",	//요청방식
+						  data: { boardLikeUser : $('[name="boardLikeUser"]').val(), boardLikeCno : $('[name="boardLikeCno"]').val()}, //파라미터
+						  dataType: "text"	//요청의 결과(서버의 응답)으로 받을 데이터의 형식
+						});
+						 
+						request.done(function( msg ) { //요청에 대한 응답을 성공적으로 받았을때 실행할 함수
+						  //서버로부터 받은 응답이 인자로 전달된다
+							location.reload();
+						});
+						 
+						request.fail(function( jqXHR, textStatus ) { //요청이 실패한 경우 실행할 함수
+						  alert( "Request failed: " + textStatus );
+						});
+						
+					})
+					
+				</script>
 				<c:choose>
 					<c:when test="${not empty searchVO.boardId}">
 						<c:url var="uptUrl" value="/board/boardRegist.do${_BASE_PARAM}">
@@ -102,6 +175,9 @@
 				<c:when test="${param.recommend eq 'Y'}">
 				<c:url var="listUrl" value="/board/recommendList.do${_BASE_PARAM}"/>
 				</c:when>
+				<c:when test="${param.like eq 'Y' }">
+				<c:url var="listUrl" value="/board/likeList.do${_BASE_PARAM}"/>
+				</c:when>
 				<c:otherwise>
 				<c:url var="listUrl" value="/board/selectList.do${_BASE_PARAM}"/>
 				</c:otherwise>
@@ -110,21 +186,22 @@
 			</div>
 	
 		</div>
+		
 <%-- 		<div>
 			<form action="/reply/add.do" method="post">
 			<textarea rows="10" cols="30" name="replyCn" ></textarea>
-			<input type="hidden" name="boardId" value="${result.boardId}"/>
-			<input type="hidden" name="userId" value="${ReplyVO.replyEmplyrId}"/>
-			<input type="button" value="등록" id="saveBtn"/>
+			<input type="hidden" name="replyBoardId" value="${result.boardId}"/>
+			<input type="hidden" name="replyEmplyrId" value="${USER_INFO.id}"/>
+			<input type="submit" value="등록" id="saveBtn"/>
 			</form>
 			
-<script type="text/javascript">
+ <script type="text/javascript">
 $('#saveBtn').on('click', function() {
 	/* var menuId = $( "ul.nav" ).first().attr( "id" ); */
 	var request = $.ajax({
 	  url: "/reply/add.do", //요청주소
 	  method: "POST",	//요청방식
-	  data: { replyCn : $('[name="replyCn"]').val(), boardId : $('[name="boardId"]').val(), userId : $('[name="userId"]').val()}, //파라미터
+	  data: { replyCn : $('[name="replyCn"]').val(), replyBoardId : $('[name="replyBoardId"]').val(), replyEmplyrId : $('[name="replyEmplyrId"]').val()}, //파라미터
 	  dataType: "text"	//요청의 결과(서버의 응답)으로 받을 데이터의 형식
 	});
 	 
@@ -140,8 +217,9 @@ $('#saveBtn').on('click', function() {
 })
 
 </script>
-
+	
 		</div> --%>
+	
 	</div>
 </div>
 <script type="text/javascript">
