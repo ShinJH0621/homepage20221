@@ -27,7 +27,7 @@
 <link href="/asset/BBSTMP_0000000000001/style.css" rel="stylesheet"/>
 <!-- 공통 Style -->
 <link href="/asset/LYTTMP_0000000000000/style.css" rel="stylesheet"/>
-<link href="/asset/rcmdstyle.css?after" rel="stylesheet"/>
+<link href="/asset/rcmdstyle.css" rel="stylesheet"/>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
@@ -131,6 +131,11 @@ footer p {
 				<i class="ico-check-spot"></i> 글쓰기			
 			</a>
 		</div>
-<%@include file="/WEB-INF/jsp/main/inc/Footer.jsp"%>		
+<%@include file="/WEB-INF/jsp/main/inc/Footer.jsp"%>
+<script>
+<c:if test="${not empty message}">
+	alert("${message}");
+</c:if>
+</script>		
 </body>
 </html>

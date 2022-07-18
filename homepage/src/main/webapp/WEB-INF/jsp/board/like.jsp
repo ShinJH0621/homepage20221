@@ -28,7 +28,7 @@
 <link href="/asset/LYTTMP_0000000000000/style.css" rel="stylesheet"/>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link href="/asset/rcmdstyle.css?after" rel="stylesheet"/>
+<link href="/asset/rcmdstyle.css" rel="stylesheet"/>
 
 <style>
 .logo1 {
@@ -42,8 +42,12 @@ width: 100%;
 .menu .gnb a:hover {
 	color: #bbb;
 }
+.cont {
+	position: relative;
+}
 .cont p{
 	padding-top: 5px;
+	display: inline-block;
 }
 footer {
 	
@@ -53,8 +57,18 @@ footer {
 footer p {
 	padding: 10px 0;
 }
-
-
+#likedelete {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	cursor: pointer;
+	width: 24px;
+	height: 24px;
+}
+#likedelete:hover{
+	border: none;
+	outline: none;
+}
 </style>
 
 
@@ -94,10 +108,17 @@ footer p {
 							<c:param name="boardId" value="${result.boardId}"/>
 							<c:param name="pageIndex" value="${searchVO.pageIndex}"/>
 						</c:url>
-                    <a href="${viewUrl}"><strong>${result.boardSj}</strong></a>
-
+                    <a href="${viewUrl}"><strong >${result.boardSj}</strong></a>
+                    
+					<br/>
               
                     <p>작성일 : <fmt:formatDate value="${result.frstRegistPnttm}" pattern="yyyy-MM-dd"/></p>
+                    <form action="/board/likedel.do" method="post">
+                   <!--  <img alt="찜삭제" src="/asset/ximage.png" class="likedelete" width="24px" height="24px"> -->
+                    <input type="hidden" name="boardLikeUser" value="${USER_INFO.id}"/>
+                    <input type="hidden" name="boardLikeCno" value="${result.boardId}"/>
+                    <input type="image" name="btn-delete" id="likedelete" src="/asset/ximage.png" alt="찜삭제" title="찜삭제" />
+                    </form>	
                     
                 </div>
             </li>
@@ -110,8 +131,32 @@ footer p {
 				<ui:pagination paginationInfo="${paginationInfo}" type="image" jsFunction="${pagingParam}"/>
 			</div>
 <%@include file="/WEB-INF/jsp/main/inc/Footer.jsp"%>		
+<!-- <script type="text/javascript">
 			
+					$('.likedelete').on('click', function() {
+							
 
+							$.ajax({
+								  url: "/board/likedel.do", 
+								  method: "POST",	
+								  data: { boardLikeUser : $('[name="boardLikeUser"]').val(), boardLikeCno : $('[name="boardLikeCno"]').val()}, 
+								  dataType: "text"	
+								}).done(function( msg ) { 
+									location.reload();
+								}).fail(function( jqXHR, textStatus ) { 
+								  alert( "Request failed: " + textStatus );
+								});	
+							
+					})
+				</script> -->
+				<script type="text/javascript">
+				$(document).ready(function(){
+					$('#likedelete').tooltip();
+				});
+				
+				
+				
+				</script>
 
 </body>
 </html>

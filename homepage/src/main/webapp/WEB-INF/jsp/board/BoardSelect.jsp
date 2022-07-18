@@ -26,19 +26,14 @@
 }
 #rcmd {
 	position: absolute;
-	top: 63px;
+	top: 42px;
 	left: 0px;
 }
 #like {
 	position: absolute;
-	top: 63px;
+	top: 42px;
 	left: 100px;
 
-}
-#likedel {
-	position: absolute;
-	top: 63px;
-	left: 190px;
 }
 
 </style>
@@ -57,8 +52,9 @@
 </c:url>
 
 
-<div class="container">
 
+<div class="container">
+	
 	<div id="contents">
 		<div id="bbs_wrap">
 			<div class="board_view">
@@ -66,7 +62,7 @@
 					<dt>제목</dt>
 					<dd><c:out value="${result.boardSj}"/></dd>
 				</dl>
-				<dl class="info_view2" id="divReloadLayer">
+				<dl class="info_view2">
 					<dt>작성자ID</dt>
 					<dd><c:out value="${result.frstRegisterId}"/></dd>
 					<dt>작성일</dt>
@@ -74,7 +70,7 @@
 					<dt>조회수</dt>
 					<dd><c:out value="${result.inqireCo}"/></dd>
 					<dt>추천수</dt>
-					<dd><c:out value="${result.rcmdCo}"/></dd>
+					<dd id="divReloadLayer"><c:out value="${result.rcmdCo}"/></dd>
 				</dl>
 				<dl class="tit_view">
 					<dt>첨부파일목록</dt>
@@ -97,13 +93,7 @@
 					<input type="button" value="추천" id="rcmd" class="btn btn-light"/>
 				</form>
 			
-					
-					<form action="/board/likedel.do" method="post">
-					<input type="hidden" name="boardLikeUser" value="${USER_INFO.id}"/>
-					<input type="hidden" name="boardLikeCno" value="${result.boardId}"/>
-					<input type="button" value="찜삭제" id="likedel" class="btn btn-light"/>
-					</form>
-					
+
 					<form action="/board/likeadd.do" method="post">
 					<input type="hidden" name="boardLikeUser" value="${USER_INFO.id}"/>
 					<input type="hidden" name="boardLikeCno" value="${result.boardId}"/>
@@ -114,42 +104,16 @@
 				
 				<script type="text/javascript">
 					$('#like').on('click', function() {
-						/* var menuId = $( "ul.nav" ).first().attr( "id" ); */
-						var request = $.ajax({
+						
+						$.ajax({
 						  url: "/board/likeadd.do", //요청주소
 						  method: "POST",	//요청방식
 						  data: { boardLikeUser : $('[name="boardLikeUser"]').val(), boardLikeCno : $('[name="boardLikeCno"]').val()}, //파라미터
 						  dataType: "text"	//요청의 결과(서버의 응답)으로 받을 데이터의 형식
-						});
-						 
-						request.done(function( msg ) { //요청에 대한 응답을 성공적으로 받았을때 실행할 함수
+						}).done(function( msg ) { //요청에 대한 응답을 성공적으로 받았을때 실행할 함수
 						  //서버로부터 받은 응답이 인자로 전달된다
-							location.reload();
-						});
-						 
-						request.fail(function( jqXHR, textStatus ) { //요청이 실패한 경우 실행할 함수
-						  alert( "Request failed: " + textStatus );
-						});
-						
-					})
-					
-				</script>
-				<script type="text/javascript">
-					$('#likedel').on('click', function() {
-						/* var menuId = $( "ul.nav" ).first().attr( "id" ); */
-						var request = $.ajax({
-						  url: "/board/likedel.do", //요청주소
-						  method: "POST",	//요청방식
-						  data: { boardLikeUser : $('[name="boardLikeUser"]').val(), boardLikeCno : $('[name="boardLikeCno"]').val()}, //파라미터
-						  dataType: "text"	//요청의 결과(서버의 응답)으로 받을 데이터의 형식
-						});
-						 
-						request.done(function( msg ) { //요청에 대한 응답을 성공적으로 받았을때 실행할 함수
-						  //서버로부터 받은 응답이 인자로 전달된다
-							location.reload();
-						});
-						 
-						request.fail(function( jqXHR, textStatus ) { //요청이 실패한 경우 실행할 함수
+							alert("찜하셨습니다.");
+						}).fail(function( jqXHR, textStatus ) { //요청이 실패한 경우 실행할 함수
 						  alert( "Request failed: " + textStatus );
 						});
 						
@@ -187,13 +151,15 @@
 	
 		</div>
 		
-<%-- 		<div>
-			<form action="/reply/add.do" method="post">
+<%--  		<div>
+			<form>
 			<textarea rows="10" cols="30" name="replyCn" ></textarea>
 			<input type="hidden" name="replyBoardId" value="${result.boardId}"/>
 			<input type="hidden" name="replyEmplyrId" value="${USER_INFO.id}"/>
-			<input type="submit" value="등록" id="saveBtn"/>
-			</form>
+			<input type="button" value="등록" id="saveBtn"/>
+		
+		</form>
+		
 			
  <script type="text/javascript">
 $('#saveBtn').on('click', function() {
@@ -207,7 +173,7 @@ $('#saveBtn').on('click', function() {
 	 
 	request.done(function( msg ) { //요청에 대한 응답을 성공적으로 받았을때 실행할 함수
 	  //서버로부터 받은 응답이 인자로 전달된다
-		location.reload();
+		alert(msg);
 	});
 	 
 	request.fail(function( jqXHR, textStatus ) { //요청이 실패한 경우 실행할 함수
@@ -224,12 +190,14 @@ $('#saveBtn').on('click', function() {
 </div>
 <script type="text/javascript">
 $('#rcmd').on('click', function() {
-	/* var menuId = $( "ul.nav" ).first().attr( "id" ); */
+	
 	var request = $.ajax({
 	  url: "/board/recommend.do", //요청주소
 	  method: "POST",	//요청방식
 	  data: { boardId : $('[name="boardId"]').val()}, //파라미터
-	  dataType: "text"	//요청의 결과(서버의 응답)으로 받을 데이터의 형식
+	  dataType: "text",	//요청의 결과(서버의 응답)으로 받을 데이터의 형식
+	  contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+			 
 
 	});
 	 
@@ -253,6 +221,12 @@ $('#rcmd').on('click', function() {
 
 
 <script>
+<c:if test="${not empty message}">
+alert("${message}");
+</c:if>
+
+
+
 $(document).ready(function(){
 	//게시 글 삭제
 	$("#btn-del").click(function(){

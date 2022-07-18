@@ -24,7 +24,7 @@ public class ReplyController {
 	
 	
 	@RequestMapping(value="/reply/add.do")
-	@ResponseBody
+	
 	public String add(@ModelAttribute("ReplyVO") ReplyVO ReplyVO, HttpServletRequest request, ModelMap model, BoardVO boardVo) throws Exception {
 		
 
@@ -32,7 +32,7 @@ public class ReplyController {
 		
 		int num = replyService.addReply(ReplyVO);
 		
-		return "";
+		return num+"개의 댓글 작성";
 		
 	}
 	

@@ -1,4 +1,5 @@
 package egovframework.let.board.web;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
@@ -220,6 +221,9 @@ public class BoardController {
 		}
 		model.addAttribute("result", result);
 		
+		searchVO.setNoticeAt("Y");
+		List<EgovMap> noticeResultList = boardService.likeList(searchVO);
+		model.addAttribute("noticeResultList", noticeResultList);
 		searchVO.setNoticeAt("N");
 		List<EgovMap> resultList = boardService.likeList(searchVO);
 		model.addAttribute("resultList", resultList);
@@ -291,6 +295,10 @@ public class BoardController {
 	public String recommend(@ModelAttribute("searchVO") BoardVO searchVO, HttpServletRequest request, ModelMap model) throws Exception{
 		
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+		if(user == null || user.getId() == null) {
+			model.addAttribute("message", "로그인 후 사용가능합니다.");
+			return "forward:/board/selectList.do";
+		}
 		model.addAttribute("USER_INFO", user);
 		boardService.recommendUp(searchVO);
 		
@@ -306,19 +314,20 @@ public class BoardController {
 		model.addAttribute("USER_INFO", user);
 		likeService.likeadd(vo);
 		
+	
+		
 		return "";
 	}
 	
 	//찜삭제
 	@RequestMapping(value="/board/likedel.do")
-	@ResponseBody
 	public String likedel(@ModelAttribute("searchVO") BoardVO searchVO, HttpServletRequest request, ModelMap model, LikeVO vo) throws Exception{
 		
 		LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
 		model.addAttribute("USER_INFO", user);
 		likeService.likedel(vo);
 		
-		return "";
+		return "redirect:/board/likeList.do";
 	}
 	
 	//찜목록

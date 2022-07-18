@@ -15,7 +15,7 @@
 	
 	<delete id="likedel">
 		DELETE FROM BOARDLIKE
-		WHERE BOARD_LIKE_CNO = #{boardLikeCno}
+		WHERE BOARD_LIKE_CNO = #{boardLikeCno} AND BOARD_LIKE_USER = #{boardLikeUser}
 	</delete>
 	
 </mapper>
