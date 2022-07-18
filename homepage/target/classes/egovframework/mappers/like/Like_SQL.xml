@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.let.board.service.impl.LikeMapper">
+
+
+	<insert id="likeadd" parameterType="egovframework.let.board.service.LikeVO">
+		INSERT INTO BOARDLIKE (
+		BOARD_LIKE_USER
+		, BOARD_LIKE_CNO
+		) VALUES (
+			#{boardLikeUser}
+			, #{boardLikeCno}
+		)
+	</insert>
+	
+	<delete id="likedel">
+		DELETE FROM BOARDLIKE
+		WHERE BOARD_LIKE_CNO = #{boardLikeCno} AND BOARD_LIKE_USER = #{boardLikeUser}
+	</delete>
+	
+</mapper>
