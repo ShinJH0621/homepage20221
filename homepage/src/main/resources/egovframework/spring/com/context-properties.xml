@@ -14,7 +14,6 @@
 	        	<entry key="board.fileStorePath" value="${Globals.File}/upload/board/"/>
 	        	<entry key="photoThumbWidth" value="342"/>
 	        	<entry key="photoThumbHeight" value="200"/>
-	        	
 	        </map>
 		</property>
 	</bean>

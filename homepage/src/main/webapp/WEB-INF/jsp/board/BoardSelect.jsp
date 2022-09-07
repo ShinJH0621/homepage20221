@@ -113,6 +113,13 @@
 						}).done(function( msg ) { //요청에 대한 응답을 성공적으로 받았을때 실행할 함수
 						  //서버로부터 받은 응답이 인자로 전달된다
 							alert("찜하셨습니다.");
+							var result = confirm('찜 페이지로 이동하시겠습니까?');
+							if(result){
+								location.replace('/board/likeList.do');
+							} else {
+								
+							}
+							
 						}).fail(function( jqXHR, textStatus ) { //요청이 실패한 경우 실행할 함수
 						  alert( "Request failed: " + textStatus );
 						});
